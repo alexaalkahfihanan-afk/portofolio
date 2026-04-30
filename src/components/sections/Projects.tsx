@@ -8,28 +8,36 @@ const projects = [
     category: "Laravel CRUD",
     image: "https://img.sanishtech.com/u/869ea724d6b0c5509689bb42f4b6663f.png",
     description: "Simple blog application with create, read, update, and delete functionality. Perfect for learning Laravel fundamentals.",
-    tags: ["NextJS", "Tailwind", "Vite"]
+    tags: ["NextJS", "Vite", "Tailwind"],
+    liveUrl: "https://min-ful-journal.vercel.app/",
+    githubUrl: "https://github.com/alexaalkahfihanan-afk/MinFul-Journal"
   },
   {
     title: "Amanah ToTheList",
     category: "Task Management",
     image: "https://specific-red-ctrmamxcxr.edgeone.app/Screenshot%202026-04-29%20192449.png",
     description: "Basic todo application to manage daily tasks. Learn routing, controllers, and database operations.",
-    tags: ["NextJS", "Tailwind", "Vite"]
+    tags: ["NextJS", "Vite", "Tailwind"],
+    liveUrl: "https://amanah-to-the-list.vercel.app/",
+    githubUrl: "https://github.com/alexaalkahfihanan-afk/amanah-ToTheList"
   },
   {
-    title: "Student Portal",
+    title: "Website Tamu-Kopi",
     category: "CRUD System",
     image: "https://images.unsplash.com/photo-151632131842504f0?auto=format&fit=crop&q=80&w=100",
     description: "Student management system with registration, data management, and basic authentication features.",
-    tags: ["Laravel", "PostgreSQL", "Tailwind"]
+    tags: ["Laravel", "MySQL", "Tailwind", "React"],
+    liveUrl: "https://example.com/student-portal",
+    githubUrl: "https://github.com/yourusername/student-portal"
   },
   {
     title: "Contact Directory",
     category: "Database App",
     image: "https://images.unsplash.com/photo-155278?auto=format&fit=crop&q=80&w=160",
     description: "Contact management system to store, organize, and manage your contacts easily.",
-    tags: ["Laravel", "MySQL", "HTML/CSS"]
+    tags: ["Laravel", "MySQL", "HTML/CSS"],
+    liveUrl: "https://example.com/contact-directory",
+    githubUrl: "https://github.com/yourusername/contact-directory"
   }
 ];
 
@@ -51,7 +59,7 @@ export function Projects() {
     
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % projects.length);
-    }, 3500);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isPreviewOpen]);
@@ -174,12 +182,12 @@ export function Projects() {
                           </div>
                           
                           <div className="flex items-center gap-8">
-                            <a href="https://amanah-to-the-list.vercel.app/" target="_blank" rel="noopener noreferrer">
+                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                               <button className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase hover:text-blue-400 transition-colors group/btn">
                                 <ExternalLink className="w-4 h-4 group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5 transition-transform" /> Live Architecture
                               </button>
                             </a>
-                            <a href="https://github.com/alexaalkahfihanan-afk/amanah-ToTheList.git" target="_blank" rel="noopener noreferrer">
+                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                               <button className="flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase hover:text-purple-400 transition-colors group/btn">
                                 <Github className="w-4 h-4" /> Code Matrix
                               </button>
