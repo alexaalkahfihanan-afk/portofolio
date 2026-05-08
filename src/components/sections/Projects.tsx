@@ -24,7 +24,7 @@ const projects = [
   {
     title: "Website Tamu-Kopi",
     category: "CRUD System",
-    image: "https://images.unsplash.com/photo-151632131842504f0?auto=format&fit=crop&q=80&w=100",
+    image: "https://images.unsplash.com/photo-1516321318423-6f1f3e128b4d?auto=format&fit=crop&q=80&w=800",
     description: "Student management system with registration, data management, and basic authentication features.",
     tags: ["Laravel", "MySQL", "Tailwind", "React"],
     liveUrl: "https://example.com/student-portal",
@@ -33,7 +33,7 @@ const projects = [
   {
     title: "Contact Directory",
     category: "Database App",
-    image: "https://images.unsplash.com/photo-155278?auto=format&fit=crop&q=80&w=160",
+    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
     description: "Contact management system to store, organize, and manage your contacts easily.",
     tags: ["Laravel", "MySQL", "HTML/CSS"],
     liveUrl: "https://example.com/contact-directory",

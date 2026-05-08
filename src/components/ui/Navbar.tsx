@@ -94,7 +94,7 @@ export function Navbar() {
       >
         <div className="container mx-auto px-6 flex items-center justify-center relative">
           {/* Desktop Nav */}
-          <div className="flex items-center gap-1 glass px-2 py-1.5 rounded-full border-white/5">
+          <div className="hidden lg:flex items-center gap-1 glass px-2 py-1.5 rounded-full border-white/5">
             {navLinks.map((link) => (
               <Magnetic key={link.name}>
                 <a
