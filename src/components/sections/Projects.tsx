@@ -87,9 +87,9 @@ export function Projects() {
       <div className="absolute inset-0 bg-blue-500/5 blur-[150px] scale-150 pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row items-end justify-between gap-12 mb-20">
-          <div className="max-w-2xl text-left font-sans">
-             <h2 className="text-sm font-mono uppercase tracking-[0.4em] text-blue-400 mb-6 flex items-center gap-3">
+        <div className="flex flex-col lg:flex-row items-center lg:items-end justify-between gap-12 mb-20">
+          <div className="max-w-2xl text-center lg:text-left font-sans">
+             <h2 className="text-sm font-mono uppercase tracking-[0.4em] text-blue-400 mb-6 flex items-center justify-center lg:justify-start gap-3">
                 <div className="w-12 h-[1px] bg-blue-400" /> System_Archive
              </h2>
              <h3 className="text-5xl md:text-8xl font-black italic tracking-tighter leading-[0.85] text-white uppercase">

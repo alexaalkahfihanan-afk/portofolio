@@ -36,8 +36,8 @@ function CertificateCard({ cert, onClick }: CertificateCardProps) {
       className="relative group aspect-[3508/2481] w-full rounded-[1.5rem] md:rounded-[2.5rem] glass p-1 cursor-pointer overflow-hidden shadow-2xl"
     >
       <div className={`relative h-full w-full rounded-[1.4rem] md:rounded-[2.3rem] overflow-hidden bg-gradient-to-br ${cert.color}`}>
-        <motion.img 
-          src={cert.image} 
+        <motion.img
+          src={cert.image}
           referrerPolicy="no-referrer"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -46,7 +46,7 @@ function CertificateCard({ cert, onClick }: CertificateCardProps) {
           className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 bg-zinc-900"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/95 via-transparent to-transparent opacity-90 group-hover:opacity-30 transition-opacity" />
-        
+
         <div className="relative h-full p-6 md:p-8 flex flex-col justify-end z-10 font-sans">
           <div className="absolute top-6 left-6 md:top-8 md:left-8">
             <motion.div layoutId={`icon-${cert.id}`} className="p-2 md:p-3 bg-black/40 backdrop-blur-xl rounded-xl border border-white/10 group-hover:bg-white group-hover:text-black transition-colors">
@@ -66,9 +66,9 @@ function CertificateCard({ cert, onClick }: CertificateCardProps) {
               {cert.issuer}
             </motion.div>
           </div>
-          
+
           <div className="absolute bottom-6 right-8 opacity-0 group-hover:opacity-100 transition-all translate-x-2 group-hover:translate-x-0 text-white bg-blue-500/80 p-2 rounded-full backdrop-blur-md">
-             <Scan className="w-4 h-4" />
+            <Scan className="w-4 h-4" />
           </div>
         </div>
       </div>
@@ -96,8 +96,8 @@ export function Certificates() {
   }, [selectedCert]);
 
   return (
-    <section 
-      id="certificates" 
+    <section
+      id="certificates"
       ref={containerRef}
       className="py-24 bg-dark-bg relative overflow-hidden flex flex-col items-center"
     >
@@ -105,7 +105,7 @@ export function Certificates() {
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
 
-      <motion.div 
+      <motion.div
         style={{ y: yParallax }}
         className="container mx-auto px-6 max-w-6xl relative z-10"
       >
@@ -128,11 +128,11 @@ export function Certificates() {
         <div className="p-8 glass rounded-[2.5rem] border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-60 hover:opacity-100 transition-opacity font-sans">
           <div className="flex items-center gap-6">
             <div className="p-4 bg-white/5 rounded-2xl">
-               <ShieldCheck className="w-10 h-10 text-emerald-400" />
+              <ShieldCheck className="w-10 h-10 text-emerald-400" />
             </div>
             <div>
-               <div className="text-sm font-bold text-white uppercase tracking-widest">End-to-End Authentication</div>
-               <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">All credentials verified via cryptographic hashing and blockchain pinning.</div>
+              <div className="text-sm font-bold text-white uppercase tracking-widest">End-to-End Authentication</div>
+              <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest mt-1">All credentials verified via cryptographic hashing and blockchain pinning.</div>
             </div>
           </div>
           <button className="px-8 py-3 bg-white/5 hover:bg-white text-white hover:text-black border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all">
@@ -143,21 +143,21 @@ export function Certificates() {
 
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 md:p-10 pointer-events-none">
-            <motion.div 
+          <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 md:p-10">
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCert(null)}
               className="absolute inset-0 bg-dark-bg/95 backdrop-blur-2xl cursor-zoom-out pointer-events-auto"
             />
-            
+
             <motion.div
               layoutId={`cert-${selectedCert.id}`}
-              className="relative w-full max-w-6xl h-fit md:h-[80vh] glass rounded-[2rem] md:rounded-[3.5rem] overflow-hidden flex flex-col md:flex-row shadow-[0_0_100px_rgba(0,0,0,0.5)] border-white/10 pointer-events-auto font-sans"
+              className="relative w-full max-w-6xl max-h-[90vh] glass rounded-[2rem] md:rounded-[3.5rem] overflow-y-auto flex flex-col md:flex-row shadow-[0_0_100px_rgba(0,0,0,0.5)] border-white/10 pointer-events-auto font-sans"
             >
-              <div className="relative w-full md:w-[65%] h-[300px] md:h-full bg-black/60 overflow-hidden flex items-center justify-center p-2 md:p-6">
-                <motion.img 
+              <div className="relative w-full md:w-[65%] min-h-[220px] md:min-h-full bg-black/60 overflow-hidden flex items-center justify-center p-2 md:p-6">
+                <motion.img
                   src={selectedCert.image}
                   referrerPolicy="no-referrer"
                   onError={(e) => {
@@ -169,13 +169,13 @@ export function Certificates() {
                 <div className="absolute inset-0 tech-grid opacity-5 pointer-events-none" />
               </div>
 
-              <div className="flex-1 p-8 md:p-10 flex flex-col justify-between bg-dark-bg/60 backdrop-blur-3xl border-l border-white/5">
+              <div className="flex-1 p-6 md:p-10 flex flex-col justify-between bg-dark-bg/60 backdrop-blur-3xl md:border-l border-t md:border-t-0 border-white/5">
                 <div>
-                  <div className="flex items-center justify-between mb-16">
+                  <div className="flex items-center justify-between mb-8 md:mb-16">
                     <motion.div layoutId={`icon-${selectedCert.id}`} className="p-5 bg-white/5 rounded-2xl border border-white/10 ring-1 ring-white/5">
                       <selectedCert.icon className="w-8 h-8 text-blue-400" />
                     </motion.div>
-                    <button 
+                    <button
                       onClick={() => setSelectedCert(null)}
                       className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all group/close"
                     >
@@ -186,14 +186,14 @@ export function Certificates() {
                   <motion.h4 layoutId={`title-${selectedCert.id}`} className="text-4xl md:text-6xl font-black italic text-white leading-[0.9] uppercase tracking-tighter mb-6">
                     {selectedCert.title}
                   </motion.h4>
-                  
+
                   <motion.div layoutId={`issuer-${selectedCert.id}`} className="flex items-center gap-4 mb-10">
                     <span className="text-[10px] font-mono text-blue-400/80 uppercase tracking-[0.2em]">{selectedCert.issuer}</span>
                     <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
                     <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">{selectedCert.id}</span>
                   </motion.div>
 
-                  <motion.p 
+                  <motion.p
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.8 }}
@@ -217,22 +217,22 @@ export function Certificates() {
                       <div className="text-xs font-bold text-white uppercase tracking-tighter">{selectedCert.date}</div>
                     </div>
                   </div>
-                  
-                 <a href="http://localhost:3000/certificates/sertifikat1.jpg" target="_blank" rel="noopener noreferrer">
-  <button className="w-full sm:w-auto px-10 py-4 bg-white text-black font-black text-[10px] tracking-[0.2em] uppercase hover:bg-blue-400 hover:text-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-    Access Link
-  </button>
-</a>
+
+                  <a href={selectedCert.image} target="_blank" rel="noopener noreferrer">
+                    <button className="w-full sm:w-auto px-10 py-4 bg-white text-black font-black text-[10px] tracking-[0.2em] uppercase hover:bg-blue-400 hover:text-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                      Access Link
+                    </button>
+                  </a>
                 </div>
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-      
+
       {/* Background Decor */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 -z-0 opacity-10 pointer-events-none">
-         <h2 className="text-[30vw] font-black italic tracking-tighter text-white/5 leading-none">ARCHIVE</h2>
+        <h2 className="text-[30vw] font-black italic tracking-tighter text-white/5 leading-none">ARCHIVE</h2>
       </div>
     </section>
   );

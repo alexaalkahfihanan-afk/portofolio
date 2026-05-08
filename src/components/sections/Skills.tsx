@@ -164,7 +164,7 @@ function SkillsMarquee() {
 
 export function Skills() {
   return (
-    <section id="skills" className="h-[105vh] w-full bg-dark-bg relative overflow-hidden tech-grid flex flex-col justify-center">
+    <section id="skills" className="h-auto md:h-[105vh] w-full bg-dark-bg relative overflow-hidden tech-grid flex flex-col justify-center">
       {/* Smooth Background Transition Gradients */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
@@ -175,16 +175,16 @@ export function Skills() {
          <h2 className="text-[15vw] font-black italic tracking-tighter text-white/5 leading-none">STACK</h2>
       </div>
 
-      <div className="absolute top-20 left-10 z-10 max-w-xl p-6 pointer-events-none">
+      <div className="md:absolute md:top-20 md:left-10 relative z-10 max-w-xl p-6 pointer-events-none pt-20 md:pt-6">
          <h2 className="text-sm font-mono uppercase tracking-[0.3em] text-blue-400 mb-4 flex items-center gap-2">
-            <div className="w-8 h-[1px] bg-blue-400" /> Abilities
+            <div className="w-8 h-[1px] bg-blue-400" /> Tech Stack
          </h2>
          <h3 className="text-5xl font-black italic tracking-tighter mb-6">
-           Floating in the<br />
-           <span className="text-gray-600">Digital Void.</span>
+           Built with the<br />
+           <span className="text-gray-600">right tools.</span>
          </h3>
          <p className="text-sm text-gray-500 max-w-sm font-light">
-           My skillset exists in a state of constant evolution, defying standard constraints.
+           A curated set of technologies I use to design, build, and ship products that work.
          </p>
       </div>
 
@@ -208,7 +208,7 @@ export function Skills() {
       </div>
 
       {/* Mobile Marquee */}
-      <div className="md:hidden relative z-10 flex flex-col items-center justify-center px-4 pb-20">
+      <div className="md:hidden relative z-10 flex flex-col items-center justify-center px-4 pb-10">
         <div className="w-full">
           <SkillsMarquee />
         </div>
