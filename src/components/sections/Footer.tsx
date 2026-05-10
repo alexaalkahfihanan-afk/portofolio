@@ -11,9 +11,8 @@ const navLinks = [
 ];
 
 const socials = [
-  { name: 'GitHub', icon: Github, href: 'https://github.com' },
-  { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com' },
-  { name: 'Email', icon: Mail, href: 'mailto:hello@aether.studio' },
+  { name: 'GitHub', icon: Github, href: 'https://github.com/alexaalkahfihanan-afk' },
+  { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/alexa-alkafi-2633a5373/' },
 ];
 
 export function Footer() {
@@ -132,11 +131,11 @@ export function Footer() {
             <div className="mt-10 grid grid-cols-2 gap-4">
               <div className="p-4 rounded-2xl border border-white/5 bg-white/[0.02]">
                 <div className="text-[9px] font-mono text-zinc-500 uppercase mb-1">Projects</div>
-                <div className="text-lg font-black text-white italic tracking-tighter">42+</div>
+                <div className="text-lg font-black text-white italic tracking-tighter">4</div>
               </div>
               <div className="p-4 rounded-2xl border border-white/5 bg-white/[0.02]">
-                <div className="text-[9px] font-mono text-zinc-500 uppercase mb-1">Focus</div>
-                <div className="text-lg font-black text-white italic tracking-tighter">Fullstack</div>
+                <div className="text-[9px] font-mono text-zinc-500 uppercase mb-1">Frontend</div>
+                <div className="text-lg font-black text-white italic tracking-tighter">Frontend</div>
               </div>
             </div>
           </div>

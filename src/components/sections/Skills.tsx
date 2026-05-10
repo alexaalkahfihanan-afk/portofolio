@@ -126,51 +126,51 @@ function FloatingSkill({ skill }: { skill: SkillData }) {
 }
 
 const SkillCard = ({ skill, index }: { skill: SkillData, index: number }) => (
-  <div className="flex-shrink-0 w-[260px] sm:w-[320px]">
-    <div className="relative h-full bg-black/40 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2rem] border border-white/5 p-5 sm:p-7 overflow-hidden group hover:border-white/20 transition-all duration-500">
+  <div className="flex-shrink-0 w-full max-w-sm mx-auto">
+    <div className="relative h-full bg-black/40 backdrop-blur-xl rounded-[1.5rem] border border-white/5 p-6 overflow-hidden group hover:border-white/20 transition-all duration-500">
       {/* Animated Glow Background based on skill color */}
       <div className={`absolute -top-16 -right-16 w-32 h-32 bg-current opacity-10 blur-[40px] group-hover:opacity-30 transition-opacity duration-700 ${skill.color}`} />
       <div className={`absolute -bottom-16 -left-16 w-32 h-32 bg-current opacity-10 blur-[40px] group-hover:opacity-20 transition-opacity duration-700 ${skill.color}`} />
-      
+
       {/* Tech Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.02] tech-grid pointer-events-none group-hover:opacity-[0.06] transition-opacity duration-500" />
 
       {/* Scanning line */}
-      <motion.div 
+      <motion.div
         animate={{ top: ['-10%', '110%'] }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: index * 0.15 }}
         className={`absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-current to-transparent opacity-20 ${skill.color}`}
       />
 
       {/* Card Header */}
-      <div className="relative flex items-start justify-between mb-8 sm:mb-10">
+      <div className="relative flex items-start justify-between mb-6">
         <div className="relative">
           {/* Rotating Dashed Ring */}
-          <motion.div 
+          <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            className={`absolute -inset-2 sm:-inset-3 border border-current opacity-20 rounded-full border-dashed ${skill.color}`}
+            className={`absolute -inset-2 border border-current opacity-20 rounded-full border-dashed ${skill.color}`}
           />
           {/* Inner Solid Ring */}
-          <motion.div 
+          <motion.div
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className={`absolute -inset-1 border border-current opacity-10 rounded-full ${skill.color}`}
           />
-          <div className={`relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 ${skill.color} shadow-[0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-md`}>
-            <skill.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_0_10px_currentColor]" />
+          <div className={`relative p-3 rounded-xl bg-white/5 border border-white/10 ${skill.color} shadow-[0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-md`}>
+            <skill.icon className="w-5 h-5 drop-shadow-[0_0_10px_currentColor]" />
           </div>
         </div>
-        
+
         {/* Tech ID / Serial */}
         <div className="flex flex-col items-end">
-          <div className="text-[8px] sm:text-[9px] font-mono text-zinc-500 tracking-widest uppercase mb-2">
+          <div className="text-[8px] font-mono text-zinc-500 tracking-widest uppercase mb-2">
             SYS.ID // 0{((index % skills.length) + 1)}
           </div>
           {/* Signal Bars */}
-          <div className="flex gap-[3px] items-end h-3 sm:h-4">
+          <div className="flex gap-[3px] items-end h-3">
             {[1, 2, 3, 4].map((_, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 animate={{ height: ['40%', '100%', '40%'] }}
                 transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
@@ -180,35 +180,35 @@ const SkillCard = ({ skill, index }: { skill: SkillData, index: number }) => (
           </div>
         </div>
       </div>
-      
+
       {/* Content */}
       <div className="relative z-10">
-        <h3 className="text-xl sm:text-2xl font-black italic uppercase text-white tracking-tighter mb-2 drop-shadow-md">
+        <h3 className="text-xl font-black italic uppercase text-white tracking-tighter mb-2 drop-shadow-md">
           {skill.name}
         </h3>
-        
+
         {/* Tech Description */}
-        <div className="h-8 sm:h-10 overflow-hidden">
-            <p className="text-[10px] sm:text-xs text-zinc-400 font-light leading-relaxed whitespace-pre-wrap">
+        <div className="h-8 overflow-hidden">
+            <p className="text-[10px] text-zinc-400 font-light leading-relaxed whitespace-pre-wrap">
               {skill.desc.split(', ').join(' • ')}
             </p>
         </div>
       </div>
-      
+
       {/* Status Footer */}
-      <div className="relative mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex items-center justify-between">
+      <div className="relative mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
         <div>
-          <div className="text-[7px] sm:text-[8px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Module_Status</div>
+          <div className="text-[7px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Module_Status</div>
           <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current animate-pulse shadow-[0_0_10px_currentColor] ${skill.color}`} />
-            <span className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-widest ${skill.color}`}>Online</span>
+            <div className={`w-1.5 h-1.5 rounded-full bg-current animate-pulse shadow-[0_0_10px_currentColor] ${skill.color}`} />
+            <span className={`text-[9px] font-bold uppercase tracking-widest ${skill.color}`}>Online</span>
           </div>
         </div>
-        
+
         <div className="flex flex-col items-end">
-            <div className="text-[7px] sm:text-[8px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Integrity</div>
-            <div className="px-2 sm:px-3 py-1 bg-white/5 rounded-full border border-white/5 backdrop-blur-md">
-              <span className="text-[8px] sm:text-[9px] font-mono text-white/70 uppercase tracking-widest">
+            <div className="text-[7px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Integrity</div>
+            <div className="px-2 py-1 bg-white/5 rounded-full border border-white/5 backdrop-blur-md">
+              <span className="text-[8px] font-mono text-white/70 uppercase tracking-widest">
                 100%
               </span>
             </div>
@@ -218,74 +218,99 @@ const SkillCard = ({ skill, index }: { skill: SkillData, index: number }) => (
   </div>
 );
 
-function SkillsMarquee() {
-  const displaySkills = [...skills, ...skills, ...skills];
-  const containerRef = useRef<HTMLDivElement>(null);
+function MobileSkillsStack() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  const handleScroll = () => {
-    if (!containerRef.current) return;
-    
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const containerCenter = containerRect.left + containerRect.width / 2;
-    
-    const children = containerRef.current.children;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-    
-    for (let i = 0; i < children.length; i++) {
-      const child = children[i] as HTMLElement;
-      const childRect = child.getBoundingClientRect();
-      const childCenter = childRect.left + childRect.width / 2;
-      const distance = Math.abs(childCenter - containerCenter);
-      
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = i;
-      }
+  const nextSkill = () => {
+    setActiveIndex((prev) => (prev + 1) % skills.length);
+  };
+
+  const prevSkill = () => {
+    setActiveIndex((prev) => (prev - 1 + skills.length) % skills.length);
+  };
+
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextSkill();
     }
-    
-    if (closestIndex !== activeIndex) {
-      setActiveIndex(closestIndex);
+    if (isRightSwipe) {
+      prevSkill();
     }
   };
 
+  // Auto-play logic
   useEffect(() => {
-    // Initial calculation after a brief delay to ensure DOM is ready
-    const timeout = setTimeout(() => handleScroll(), 100);
-    return () => clearTimeout(timeout);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % skills.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="w-full py-10 relative flex flex-col gap-6">
-      {/* Background ambient light */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[200px] bg-blue-500/10 blur-[100px] pointer-events-none" />
-
-      {/* Fade masks for left/right edges */}
-      <div className="absolute top-0 left-0 w-16 sm:w-32 h-full bg-gradient-to-r from-dark-bg to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-16 sm:w-32 h-full bg-gradient-to-l from-dark-bg to-transparent z-10 pointer-events-none" />
-
-      {/* Swipeable Container */}
-      <div 
-        ref={containerRef}
-        onScroll={handleScroll}
-        className="flex gap-4 sm:gap-6 overflow-x-auto overflow-y-hidden w-full px-[calc(50vw-130px)] sm:px-[calc(50vw-160px)] snap-x snap-mandatory touch-pan-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative z-20 pb-8 pt-4"
+    <div className="relative w-full mx-auto flex items-center justify-center gap-8 perspective-[2000px]">
+      <div
+        className="relative w-full max-w-4xl h-[500px] perspective-[2000px]"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        {displaySkills.map((skill, index) => {
-          const isActive = index === activeIndex;
-          return (
-            <div 
-              key={index} 
-              className={`snap-center shrink-0 transition-all duration-500 ease-out origin-center ${
-                isActive 
-                  ? "scale-100 opacity-100 z-10 drop-shadow-[0_0_30px_rgba(96,165,250,0.3)]" 
-                  : "scale-[0.8] sm:scale-[0.85] opacity-30 z-0 blur-[2px]"
-              }`}
-            >
-              <SkillCard skill={skill} index={index} />
-            </div>
-          );
-        })}
+        <AnimatePresence mode="popLayout">
+          {skills.map((skill, index) => {
+            const rotate = (index - activeIndex) * 3;
+            const xOffset = (index - activeIndex) * 30;
+            const zIndex = skills.length - Math.abs(index - activeIndex);
+            const isPrev = index < activeIndex;
+            const isActive = index === activeIndex;
+
+            if (index < activeIndex - 1 || index > activeIndex + 2) return null;
+
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 200, scale: 0.8, rotate: 10 }}
+                animate={{
+                  opacity: isActive ? 1 : (isPrev ? 0 : 0.5),
+                  x: isPrev ? -200 : xOffset,
+                  scale: isActive ? 1 : 0.9,
+                  rotate: isActive ? 0 : rotate,
+                  zIndex: isActive ? 50 : 20 - index,
+                }}
+                exit={{ opacity: 0, x: -200, scale: 0.8, rotate: -10 }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                onClick={() => index !== activeIndex && setActiveIndex(index)}
+              >
+                <div className={`h-full w-full glass rounded-[2.5rem] p-1 border-white/5 overflow-hidden shadow-2xl relative group ${!isActive && 'pointer-events-none'}`}>
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-bg via-dark-bg/20 to-transparent" />
+
+                  {isActive && (
+                    <div className="relative h-full p-8 flex flex-col justify-center z-10 font-sans">
+                      <SkillCard skill={skill} index={index} />
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </div>
   );
@@ -336,10 +361,20 @@ export function Skills() {
         </Canvas>
       </div>
 
-      {/* Mobile Marquee */}
+      {/* Mobile Stacked Cards */}
       <div className="md:hidden relative z-10 flex flex-col items-center justify-center px-4 pb-10">
         <div className="w-full">
-          <SkillsMarquee />
+          <MobileSkillsStack />
+        </div>
+
+        {/* Pagination Footer */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-20">
+          {skills.map((_, i) => (
+            <div
+              key={i}
+              className={`transition-all duration-500 rounded-full ${i === 0 ? 'w-12 h-1.5 bg-blue-400' : 'w-1.5 h-1.5 bg-white/20'}`}
+            />
+          ))}
         </div>
       </div>
 

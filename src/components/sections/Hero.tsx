@@ -97,7 +97,10 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Magnetic>
-                <button className="group relative px-12 py-5 bg-white text-black font-bold text-[10px] tracking-[0.3em] uppercase overflow-hidden transition-transform active:scale-95 cursor-pointer">
+                <button
+                  onClick={() => document.getElementById('profile')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="group relative px-12 py-5 bg-white text-black font-bold text-[10px] tracking-[0.3em] uppercase overflow-hidden transition-transform active:scale-95 cursor-pointer"
+                >
                   <span className="relative z-10 flex items-center gap-2">
                     Enter Archive <ArrowDownRight className="w-4 h-4" />
                   </span>

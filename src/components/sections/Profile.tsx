@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView } from 'motion/react';
-import { Download, Play, Shield, Award, Calendar, Zap } from 'lucide-react';
+import { Eye, Play, Shield, Award, Calendar, Zap } from 'lucide-react';
 import { Magnetic } from '../ui/Magnetic';
 
 function Counter({ value, suffix = "" }: { value: number; suffix?: string }) {
@@ -141,16 +141,16 @@ export function Profile() {
                 <div className="px-5 py-3 glass rounded-xl flex items-center gap-3 hover:border-blue-400/20 transition-all group">
                   <Shield className="w-4 h-4 text-blue-400 opacity-60 group-hover:opacity-100" />
                   <div>
-                    <div className="text-[10px] font-bold text-white uppercase">Technical Lead</div>
-                    <div className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Aether Core</div>
+                    <div className="text-[10px] font-bold text-white uppercase">Junior Programmer</div>
+                    <div className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Code Academy</div>
                   </div>
                 </div>
                 
                 <div className="px-5 py-3 glass rounded-xl flex items-center gap-3 hover:border-purple-400/20 transition-all group">
                   <Award className="w-4 h-4 text-purple-400 opacity-60 group-hover:opacity-100" />
                   <div>
-                    <div className="text-[10px] font-bold text-white uppercase">UX Vanguard</div>
-                    <div className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Global 25'</div>
+                    <div className="text-[10px] font-bold text-white uppercase">Frontend</div>
+                    <div className="text-[8px] font-mono text-zinc-600 uppercase tracking-widest">Global Hub</div>
                   </div>
                 </div>
               </div>
@@ -175,20 +175,14 @@ export function Profile() {
               {/* Actions */}
               <div className="flex flex-wrap items-center gap-6">
                 <Magnetic>
-                  <button className="group relative px-8 py-3.5 bg-white text-black font-bold text-[9px] tracking-widest uppercase overflow-hidden cursor-pointer active:scale-95 transition-transform">
+                  <button
+                    onClick={() => window.open('/cv1.pdf', '_blank')}
+                    className="group relative px-8 py-3.5 bg-white text-black font-bold text-[9px] tracking-widest uppercase overflow-hidden cursor-pointer active:scale-95 transition-transform"
+                  >
                     <span className="relative z-10 flex items-center gap-2 italic">
-                      Download CV <Download className="w-3.5 h-3.5" />
+                      Lihat CV <Eye className="w-3.5 h-3.5" />
                     </span>
                     <div className="absolute inset-0 bg-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300 opacity-80" />
-                  </button>
-                </Magnetic>
-
-                <Magnetic>
-                  <button className="flex items-center gap-3 text-[9px] font-bold tracking-widest uppercase text-white/40 hover:text-white transition-colors cursor-pointer group italic">
-                    <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-blue-400/5 group-hover:border-blue-400/30 transition-all">
-                      <Play className="w-3 h-3 fill-current ml-0.5" />
-                    </div>
-                    Intro
                   </button>
                 </Magnetic>
               </div>

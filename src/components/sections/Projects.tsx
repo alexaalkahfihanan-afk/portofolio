@@ -44,6 +44,8 @@ const projects = [
 export function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const nextProject = () => {
     setActiveIndex((prev) => (prev + 1) % projects.length);
@@ -53,10 +55,34 @@ export function Projects() {
     setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
+  // Touch handlers for swipe functionality
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextProject();
+    }
+    if (isRightSwipe) {
+      prevProject();
+    }
+  };
+
   // Auto-play logic
   useEffect(() => {
     if (isPreviewOpen) return;
-    
+
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % projects.length);
     }, 4000);
@@ -112,7 +138,12 @@ export function Projects() {
             <ChevronLeft className="w-6 h-6 group-active:scale-75 transition-transform" />
           </button>
 
-          <div className="relative w-full max-w-6xl h-[500px] md:h-[600px] perspective-[2000px]">
+          <div
+            className="relative w-full max-w-6xl h-[500px] md:h-[600px] perspective-[2000px]"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
           <AnimatePresence mode="popLayout">
             {projects.map((project, index) => {
               const rotate = (index - activeIndex) * 5;
@@ -206,22 +237,6 @@ export function Projects() {
           <button 
             onClick={nextProject}
             className="hidden md:flex p-5 rounded-full glass border-white/5 hover:bg-white hover:text-black transition-all group flex-shrink-0 z-30"
-          >
-            <ChevronRight className="w-6 h-6 group-active:scale-75 transition-transform" />
-          </button>
-        </div>
-
-        {/* Mobile Navigation Buttons */}
-        <div className="flex md:hidden items-center justify-center gap-4 mt-8">
-          <button 
-            onClick={prevProject}
-            className="p-5 rounded-full glass border-white/5 hover:bg-white hover:text-black transition-all group"
-          >
-            <ChevronLeft className="w-6 h-6 group-active:scale-75 transition-transform" />
-          </button>
-          <button 
-            onClick={nextProject}
-            className="p-5 rounded-full glass border-white/5 hover:bg-white hover:text-black transition-all group"
           >
             <ChevronRight className="w-6 h-6 group-active:scale-75 transition-transform" />
           </button>
