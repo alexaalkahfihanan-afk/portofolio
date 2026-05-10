@@ -143,20 +143,21 @@ export function Certificates() {
 
       <AnimatePresence>
         {selectedCert && (
-          <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 md:p-10">
+          <div className="fixed inset-0 z-[500] flex items-center justify-center p-4 sm:p-6 md:p-10">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedCert(null)}
-              className="absolute inset-0 bg-dark-bg/95 backdrop-blur-2xl cursor-zoom-out pointer-events-auto"
+              className="absolute inset-0 bg-dark-bg/95 backdrop-blur-2xl cursor-zoom-out"
             />
 
             <motion.div
               layoutId={`cert-${selectedCert.id}`}
-              className="relative w-full max-w-6xl max-h-[90vh] glass rounded-[2rem] md:rounded-[3.5rem] overflow-y-auto flex flex-col md:flex-row shadow-[0_0_100px_rgba(0,0,0,0.5)] border-white/10 pointer-events-auto font-sans"
+              className="relative w-full max-w-6xl h-[85vh] md:h-[85vh] lg:h-[90vh] glass rounded-[1.5rem] md:rounded-[3.5rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] border-white/10 font-sans z-10 overflow-hidden flex flex-col md:flex-row"
             >
-              <div className="relative w-full md:w-[65%] min-h-[220px] md:min-h-full bg-black/60 overflow-hidden flex items-center justify-center p-2 md:p-6">
+              {/* IMAGE SECTION */}
+              <div className="relative w-full md:w-[55%] lg:w-[65%] shrink-0 h-[250px] sm:h-[300px] md:h-full bg-black/60 flex items-center justify-center p-4 md:p-6 lg:p-10">
                 <motion.img
                   src={selectedCert.image}
                   referrerPolicy="no-referrer"
@@ -164,65 +165,68 @@ export function Certificates() {
                     const target = e.target as HTMLImageElement;
                     target.src = "https://images.unsplash.com/photo-1589330694653-96b6f9a94943?auto=format&fit=crop&q=80&w=1200";
                   }}
-                  className="w-full h-full object-contain shadow-2xl bg-zinc-900"
+                  className="w-full h-full object-contain drop-shadow-2xl md:bg-zinc-900 rounded-lg md:rounded-none"
                 />
                 <div className="absolute inset-0 tech-grid opacity-5 pointer-events-none" />
               </div>
 
-              <div className="flex-1 p-6 md:p-10 flex flex-col justify-between bg-dark-bg/60 backdrop-blur-3xl md:border-l border-t md:border-t-0 border-white/5">
-                <div>
-                  <div className="flex items-center justify-between mb-8 md:mb-16">
-                    <motion.div layoutId={`icon-${selectedCert.id}`} className="p-5 bg-white/5 rounded-2xl border border-white/10 ring-1 ring-white/5">
-                      <selectedCert.icon className="w-8 h-8 text-blue-400" />
+              {/* TEXT SECTION (SCROLLABLE) */}
+              <div className="flex-1 overflow-y-auto overscroll-contain bg-dark-bg/60 backdrop-blur-3xl md:border-l border-t md:border-t-0 border-white/5">
+                <div className="p-6 md:p-8 lg:p-10 flex flex-col min-h-full justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-8 md:mb-12">
+                      <motion.div layoutId={`icon-${selectedCert.id}`} className="p-4 md:p-5 bg-white/5 rounded-xl md:rounded-2xl border border-white/10 ring-1 ring-white/5">
+                        <selectedCert.icon className="w-6 h-6 md:w-8 md:h-8 text-blue-400" />
+                      </motion.div>
+                      <button
+                        onClick={() => setSelectedCert(null)}
+                        className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all group/close"
+                      >
+                        <X className="w-5 h-5 md:w-6 md:h-6 text-zinc-500 group-hover/close:text-white transition-colors" />
+                      </button>
+                    </div>
+
+                    <motion.h4 layoutId={`title-${selectedCert.id}`} className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black italic text-white leading-[0.9] uppercase tracking-tighter mb-4 md:mb-6">
+                      {selectedCert.title}
+                    </motion.h4>
+
+                    <motion.div layoutId={`issuer-${selectedCert.id}`} className="flex items-center gap-3 md:gap-4 mb-8 md:mb-10">
+                      <span className="text-[9px] md:text-[10px] font-mono text-blue-400/80 uppercase tracking-[0.2em]">{selectedCert.issuer}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                      <span className="text-[9px] md:text-[10px] font-mono text-zinc-500 uppercase tracking-widest">{selectedCert.id}</span>
                     </motion.div>
-                    <button
-                      onClick={() => setSelectedCert(null)}
-                      className="p-3 bg-white/5 hover:bg-white/10 border border-white/5 rounded-full transition-all group/close"
+
+                    <motion.p
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2, duration: 0.8 }}
+                      className="text-zinc-400 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10 md:mb-12 max-w-lg"
                     >
-                      <X className="w-6 h-6 text-zinc-500 group-hover/close:text-white transition-colors" />
-                    </button>
+                      {selectedCert.details}
+                    </motion.p>
                   </div>
 
-                  <motion.h4 layoutId={`title-${selectedCert.id}`} className="text-4xl md:text-6xl font-black italic text-white leading-[0.9] uppercase tracking-tighter mb-6">
-                    {selectedCert.title}
-                  </motion.h4>
-
-                  <motion.div layoutId={`issuer-${selectedCert.id}`} className="flex items-center gap-4 mb-10">
-                    <span className="text-[10px] font-mono text-blue-400/80 uppercase tracking-[0.2em]">{selectedCert.issuer}</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
-                    <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">{selectedCert.id}</span>
-                  </motion.div>
-
-                  <motion.p
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-zinc-400 text-base md:text-lg font-light leading-relaxed mb-12 max-w-lg"
-                  >
-                    {selectedCert.details}
-                  </motion.p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-white/10">
-                  <div className="flex gap-10">
-                    <div>
-                      <div className="text-[9px] font-mono text-zinc-700 uppercase tracking-widest mb-2">Auth_Status</div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
-                        <span className="text-xs font-bold text-emerald-500 uppercase tracking-tighter">Live_Verified</span>
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6 md:gap-8 pt-8 md:pt-10 border-t border-white/10 mt-10">
+                    <div className="flex gap-6 md:gap-10 w-full sm:w-auto justify-between sm:justify-start">
+                      <div>
+                        <div className="text-[8px] md:text-[9px] font-mono text-zinc-700 uppercase tracking-widest mb-2">Auth_Status</div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_10px_#10b981]" />
+                          <span className="text-[10px] md:text-xs font-bold text-emerald-500 uppercase tracking-tighter">Live_Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[8px] md:text-[9px] font-mono text-zinc-700 uppercase tracking-widest mb-2">Issue_Stamp</div>
+                        <div className="text-[10px] md:text-xs font-bold text-white uppercase tracking-tighter">{selectedCert.date}</div>
                       </div>
                     </div>
-                    <div>
-                      <div className="text-[9px] font-mono text-zinc-700 uppercase tracking-widest mb-2">Issue_Stamp</div>
-                      <div className="text-xs font-bold text-white uppercase tracking-tighter">{selectedCert.date}</div>
-                    </div>
-                  </div>
 
-                  <a href={selectedCert.image} target="_blank" rel="noopener noreferrer">
-                    <button className="w-full sm:w-auto px-10 py-4 bg-white text-black font-black text-[10px] tracking-[0.2em] uppercase hover:bg-blue-400 hover:text-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-                      Access Link
-                    </button>
-                  </a>
+                    <a href={selectedCert.image} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto mt-4 sm:mt-0">
+                      <button className="w-full sm:w-auto px-8 md:px-10 py-3 md:py-4 bg-white text-black font-black text-[9px] md:text-[10px] tracking-[0.2em] uppercase hover:bg-blue-400 hover:text-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                        Access Link
+                      </button>
+                    </a>
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from 'react';
+import { useRef, useState, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Html, Float, Environment, PerspectiveCamera, ContactShadows } from '@react-three/drei';
 import { motion, AnimatePresence } from 'motion/react';
@@ -125,39 +125,168 @@ function FloatingSkill({ skill }: { skill: SkillData }) {
   );
 }
 
-function SkillsMarquee() {
-  return (
-    <div className="w-full overflow-hidden py-12 px-4">
-      <motion.div
-        animate={{ x: [0, -1400] }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        className="flex gap-8 whitespace-nowrap"
-      >
-        {[...skills, ...skills].map((skill, index) => (
-          <div key={index} className="flex-shrink-0 w-80">
-            <div className="h-full glass rounded-3xl border border-white/10 p-6 shadow-[0_0_20px_rgba(96,165,250,0.1)] hover:border-white/20 transition-all group">
-              <div className="flex items-start gap-4 mb-4">
-                <div className={`p-4 rounded-2xl glass ${skill.color} shadow-[0_0_20px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_30px_rgba(96,165,250,0.2)] transition-all`}>
-                  <skill.icon className="w-7 h-7" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold uppercase text-white tracking-widest mb-1">{skill.name}</h3>
-                  <p className={`text-xs font-mono uppercase tracking-[0.15em] ${skill.color}`}>Skill</p>
-                </div>
-              </div>
-              
-              <p className="text-sm text-zinc-400 font-light leading-relaxed mb-4">
-                Specialized in {skill.desc.toLowerCase()}
-              </p>
-              
-              <div className="flex items-center gap-2 text-xs">
-                <div className={`w-2 h-2 rounded-full ${skill.color}`} />
-                <span className="text-zinc-500">Available</span>
-              </div>
-            </div>
+const SkillCard = ({ skill, index }: { skill: SkillData, index: number }) => (
+  <div className="flex-shrink-0 w-[260px] sm:w-[320px]">
+    <div className="relative h-full bg-black/40 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2rem] border border-white/5 p-5 sm:p-7 overflow-hidden group hover:border-white/20 transition-all duration-500">
+      {/* Animated Glow Background based on skill color */}
+      <div className={`absolute -top-16 -right-16 w-32 h-32 bg-current opacity-10 blur-[40px] group-hover:opacity-30 transition-opacity duration-700 ${skill.color}`} />
+      <div className={`absolute -bottom-16 -left-16 w-32 h-32 bg-current opacity-10 blur-[40px] group-hover:opacity-20 transition-opacity duration-700 ${skill.color}`} />
+      
+      {/* Tech Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.02] tech-grid pointer-events-none group-hover:opacity-[0.06] transition-opacity duration-500" />
+
+      {/* Scanning line */}
+      <motion.div 
+        animate={{ top: ['-10%', '110%'] }}
+        transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: index * 0.15 }}
+        className={`absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-current to-transparent opacity-20 ${skill.color}`}
+      />
+
+      {/* Card Header */}
+      <div className="relative flex items-start justify-between mb-8 sm:mb-10">
+        <div className="relative">
+          {/* Rotating Dashed Ring */}
+          <motion.div 
+            animate={{ rotate: 360 }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className={`absolute -inset-2 sm:-inset-3 border border-current opacity-20 rounded-full border-dashed ${skill.color}`}
+          />
+          {/* Inner Solid Ring */}
+          <motion.div 
+            animate={{ rotate: -360 }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className={`absolute -inset-1 border border-current opacity-10 rounded-full ${skill.color}`}
+          />
+          <div className={`relative p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 ${skill.color} shadow-[0_0_20px_rgba(255,255,255,0.02)] backdrop-blur-md`}>
+            <skill.icon className="w-5 h-5 sm:w-6 sm:h-6 drop-shadow-[0_0_10px_currentColor]" />
           </div>
-        ))}
-      </motion.div>
+        </div>
+        
+        {/* Tech ID / Serial */}
+        <div className="flex flex-col items-end">
+          <div className="text-[8px] sm:text-[9px] font-mono text-zinc-500 tracking-widest uppercase mb-2">
+            SYS.ID // 0{((index % skills.length) + 1)}
+          </div>
+          {/* Signal Bars */}
+          <div className="flex gap-[3px] items-end h-3 sm:h-4">
+            {[1, 2, 3, 4].map((_, i) => (
+              <motion.div 
+                key={i}
+                animate={{ height: ['40%', '100%', '40%'] }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.15 }}
+                className={`w-1 rounded-sm bg-current opacity-60 ${skill.color}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <h3 className="text-xl sm:text-2xl font-black italic uppercase text-white tracking-tighter mb-2 drop-shadow-md">
+          {skill.name}
+        </h3>
+        
+        {/* Tech Description */}
+        <div className="h-8 sm:h-10 overflow-hidden">
+            <p className="text-[10px] sm:text-xs text-zinc-400 font-light leading-relaxed whitespace-pre-wrap">
+              {skill.desc.split(', ').join(' • ')}
+            </p>
+        </div>
+      </div>
+      
+      {/* Status Footer */}
+      <div className="relative mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/10 flex items-center justify-between">
+        <div>
+          <div className="text-[7px] sm:text-[8px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Module_Status</div>
+          <div className="flex items-center gap-2">
+            <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current animate-pulse shadow-[0_0_10px_currentColor] ${skill.color}`} />
+            <span className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-widest ${skill.color}`}>Online</span>
+          </div>
+        </div>
+        
+        <div className="flex flex-col items-end">
+            <div className="text-[7px] sm:text-[8px] font-mono text-zinc-600 uppercase tracking-widest mb-1">Integrity</div>
+            <div className="px-2 sm:px-3 py-1 bg-white/5 rounded-full border border-white/5 backdrop-blur-md">
+              <span className="text-[8px] sm:text-[9px] font-mono text-white/70 uppercase tracking-widest">
+                100%
+              </span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+function SkillsMarquee() {
+  const displaySkills = [...skills, ...skills, ...skills];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
+    
+    const children = containerRef.current.children;
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    
+    for (let i = 0; i < children.length; i++) {
+      const child = children[i] as HTMLElement;
+      const childRect = child.getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(childCenter - containerCenter);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = i;
+      }
+    }
+    
+    if (closestIndex !== activeIndex) {
+      setActiveIndex(closestIndex);
+    }
+  };
+
+  useEffect(() => {
+    // Initial calculation after a brief delay to ensure DOM is ready
+    const timeout = setTimeout(() => handleScroll(), 100);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return (
+    <div className="w-full py-10 relative flex flex-col gap-6">
+      {/* Background ambient light */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[200px] bg-blue-500/10 blur-[100px] pointer-events-none" />
+
+      {/* Fade masks for left/right edges */}
+      <div className="absolute top-0 left-0 w-16 sm:w-32 h-full bg-gradient-to-r from-dark-bg to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-16 sm:w-32 h-full bg-gradient-to-l from-dark-bg to-transparent z-10 pointer-events-none" />
+
+      {/* Swipeable Container */}
+      <div 
+        ref={containerRef}
+        onScroll={handleScroll}
+        className="flex gap-4 sm:gap-6 overflow-x-auto overflow-y-hidden w-full px-[calc(50vw-130px)] sm:px-[calc(50vw-160px)] snap-x snap-mandatory touch-pan-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative z-20 pb-8 pt-4"
+      >
+        {displaySkills.map((skill, index) => {
+          const isActive = index === activeIndex;
+          return (
+            <div 
+              key={index} 
+              className={`snap-center shrink-0 transition-all duration-500 ease-out origin-center ${
+                isActive 
+                  ? "scale-100 opacity-100 z-10 drop-shadow-[0_0_30px_rgba(96,165,250,0.3)]" 
+                  : "scale-[0.8] sm:scale-[0.85] opacity-30 z-0 blur-[2px]"
+              }`}
+            >
+              <SkillCard skill={skill} index={index} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
