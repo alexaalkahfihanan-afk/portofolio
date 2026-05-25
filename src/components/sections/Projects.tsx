@@ -6,7 +6,7 @@ const projects = [
   {
     title: "Mindful Journal",
     category: "Laravel CRUD",
-    image: "https://img.sanishtech.com/u/869ea724d6b0c5509689bb42f4b6663f.png",
+    image: "/projects/mindful.png",
     description: "Simple blog application with create, read, update, and delete functionality. Perfect for learning Laravel fundamentals.",
     tags: ["NextJS", "Vite", "Tailwind"],
     liveUrl: "https://min-ful-journal.vercel.app/",
@@ -15,25 +15,24 @@ const projects = [
   {
     title: "Amanah ToTheList",
     category: "Task Management",
-    image: "https://specific-red-ctrmamxcxr.edgeone.app/Screenshot%202026-04-29%20192449.png",
+    image: "/projects/todo.png",
     description: "Basic todo application to manage daily tasks. Learn routing, controllers, and database operations.",
     tags: ["NextJS", "Vite", "Tailwind"],
     liveUrl: "https://amanah-to-the-list.vercel.app/",
     githubUrl: "https://github.com/alexaalkahfihanan-afk/amanah-ToTheList"
   },
   {
-    title: "Website Tamu-Kopi",
+    title: "Tamu-Kopi",
     category: "CRUD System",
-    image: "https://images.unsplash.com/photo-1516321318423-6f1f3e128b4d?auto=format&fit=crop&q=80&w=800",
+    image: "/projects/tamu.png",
     description: "Student management system with registration, data management, and basic authentication features.",
     tags: ["Laravel", "MySQL", "Tailwind", "React"],
-    liveUrl: "https://example.com/student-portal",
-    githubUrl: "https://github.com/yourusername/student-portal"
+    liveUrl: "https://tamu-kopi-production.up.railway.app/",
   },
   {
     title: "Contact Directory",
     category: "Database App",
-    image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=800",
+    image: "/projects/contact-directory.png",
     description: "Contact management system to store, organize, and manage your contacts easily.",
     tags: ["Laravel", "MySQL", "HTML/CSS"],
     liveUrl: "https://example.com/contact-directory",
